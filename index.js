@@ -32,7 +32,21 @@ var Animal =mongoose.model('Animal', animalSchema);
 //   }
 // });
 //GET /animals
+server.get('/animals', function(req, res){
+  Animal.find({}, function(err, documents){
+  if(err){
+    res.status(500).json({
+      msg: err  //in this case were using err. but in other cases use string something broke for privacy
+    });
+  } else {
+    res.status(200).json({
+      animals: documents
+    });
+  }
+  });
+});
 //GET /animals
+server.get('/animals/:id', function(req, res){});
 //POST /animals
 //PUT /animals/:id
 //DELETE /animals/:id
